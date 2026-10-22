@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <style>
+    html * {
+    font-size: 0.97em !important;
+    }
+
+    .quizDiv {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        text-align: center;
+        width: 97%;
+        margin: auto;
+
+    }
+
+    .btn {
+        padding: 9px;
+    }
+
+    .btn-light {
+        background-color: EFEFEF;
+    }
+
+    .btn,
+    .btn-block {
+        padding-left: 4.8%;
+        padding-right: 4.8%;
+        margin: auto;
+        white-space: normal;
+    }
+
+
+
+    div {
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+    .question {
+        padding-top: 10px;
+    }
+
+    .quizDiv {
+        margin-bottom: 20px;
+    }
+    .feedback {
+        font-weight: bold;
+        font-size: 1.7em;
+        display:none;
+    }
+    .makeOpaque {
+        opacity: 0.65;
+    }
+    .btn-success, .btn-success:focus {
+        background: linear-gradient(
+        to right, 
+        198754 0%, 
+        198754 5%, 
+        EFF4EF 5%, 
+        EFF4EF  95%,
+        198754 95%,
+        198754 100%
+    );
+    color:black;
+    outline: none !important;
+    border: 0px;
+    }
+
+    .btn-secondary, .btn-secondary:focus {
+        background: linear-gradient(
+        to right, 
+        adb5bd 0%, 
+        adb5bd 5%, 
+        EFEFEF 5%, 
+        EFEFEF  95%,
+        adb5bd 95%,
+        adb5bd 100%
+    );
+    color:black;
+    outline: none !important;
+    border: 0px;
+    }
+
+    .btn-danger, .btn-danger:focus {
+        background: linear-gradient(
+        to right, 
+        dc3545 0%, 
+        dc3545 5%, 
+        F4EFEF 5%, 
+        F4EFEF  95%,
+        dc3545 95%,
+        dc3545 100%
+    );
+    color:black;
+    outline: none !important;
+    border: 0px;
+    }
+
+
+    .btn-warning, .btn-warning:focus {
+        background: linear-gradient(
+        to right, 
+        ffc107 0%, 
+        ffc107 5%, 
+        EFEFEA 5%, 
+        EFEFEA  95%,
+        ffc107 95%,
+        ffc107 100%
+    );
+        color:black;
+        outline: none !important;
+        border: 0px;
+    }
+
+
+    .btn:focus,.btn:active:focus,.btn.active:focus,
+    .btn.focus,.btn:active.focus,.btn.active.focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    img {
+        max-width: 100%;
+        display:block;
+        margin: auto;
+    } 
+
+    button:not(.filterButton) {
+        width: 98%;
+    }
+
+    .filterButton {
+        border-radius: 10px;
+        margin-top: 1px;
+    }
+    .filterDiv {
+        max-width:97.5%;
+        margin: auto;
+        margin-top: 1px;
+    }
+    .pointerNone {
+        pointer-events: none;
+    }
+    </style>
+</head>
+<body>
+
+
+
+
+    <script>
+        document.body.onload = addElement;
+        function addElement() {
+var RIGHTS={
+0: {question: "De fiecare data cand se doreste adaugarea unei memorii de mari dimensiuni la un sistem de calcul, se foloseste in general:", rights: ["RAM dinamic"], wrongs: ["ROM", "RAM static", "Si SRAM si DRAM"], feedback: ""},
+1: {question: "Semnalul IOWR (activ pe 0) indeplineste urmatoarea operatie:", rights: ["scrierea datelor de iesire de pe magistrala de date"], wrongs: ["citirea datelor de pe magistrala de iesire", "citirea datelor de pe magistrala de intrare", "scrierea datelor de intrare pe magistrala de date"], feedback: ""},
+2: {question: "Pentru a obtine o magistrala de date de 16 biti din doua chip-uri 4Kx8 de RAM, acestea trebuie aranjate in:", rights: ["paralel"], wrongs: ["nu se pot aranja", "serie", "si serie si paralel"], feedback: ""},
+3: {question: "Pentru un program uzual, ce fel de instructiune se afla la adresa 0x0000 din memoria de program a ATMEGA328p?", rights: ["Jump"], wrongs: ["Orice instructiune", "Load", "Store"], feedback: ""},
+4: {question: "Semnalele RW, WR, M/IO sunt de baza pentru procesorul 8086 in modul", rights: ["Minim"], wrongs: ["Control", "Compatibility", "Maxim"], feedback: ""},
+5: {question: "Care este ultima adresa pentru un SRAM de 31kB mapat la  inceputul spatiului de memorie al unui procesor generic cu magistrala de adrese de 16 biti?", rights: ["7BFFH"], wrongs: ["7C00H", "CAFEH", "3BFFH"], feedback: ""},
+6: {question: "Arduino Uno poate sa comunice cu alta placa similara prin intermediul", rights: ["Toate de mai sus"], wrongs: ["Interfetei I2C", "Interfetei SPI", "Interfetei seriale RS232"], feedback: ""},
+7: {question: "MOV R1, 5000 (2 words) MOV R2, [R1] (1 word) ADD R2, R3 (1 word) MOV 6000, R2 (2 words) HALT (1 word). Memorie adresabila la nivel de octet. 1 word = 4 bytes. Program incarcat la 1000 zecimal. INT inainte de HALT. Care este adresa de intoarcere (in zecimal) stocata pe stiva?", rights: ["1028"], wrongs: ["1024", "1007", "1020"], feedback: "Cum mama masii e 1028, ca am adunat in toate felurile si tot 1024 da."},
+8: {question: "Bus Interface Unit a procesorului 8086 face prefetch la instructiuni si le stocheaza in:", rights: ["Coada"], wrongs: ["Stiva", "Registre generale", "Instruction pointer"], feedback: ""},
+9: {question: "Daca offset-ul unui segment este pe 16 biti, atunci spatiul de memorie pentru un segment este:", rights: ["64KB"], wrongs: ["64 bytes", "1MB", "1KB"], feedback: ""},
+10: {question: "Magistrala este disponibila pentru controller-ul de DMA cand acesta primeste primeste semnalul:", rights: ["HLDA"], wrongs: ["DACK", "Toate de mai sus", "HRQ"], feedback: ""},
+11: {question: "8086 face fetch la instructiuni din:", rights: ["Code Segment"], wrongs: ["Extra Segment", "Instruction pointer", "Stack Segment"], feedback: ""},
+12: {question: "Care este capacitatea teoretica maxima a unei memorii pe care o putem interfata la 8086?", rights: ["2MB"], wrongs: ["128KB", "1MB", "64KB"], feedback: ""},
+13: {question: "Un procesor generic cu magistrala de date de 16 biti si magistrala de adrese de 32 biti poate adresa teoretic un spatiu de memorie de:", rights: ["8GB"], wrongs: ["2GB", "1GB", "4GB"], feedback: ""},
+14: {question: "Pentru a construi o memorie de 65kBx32 putem folosi:", rights: ["Toate variantele"], wrongs: ["4 memorii 64Kx8 si 4 memorii 1Kx8", "O memorie 64Kx32 si o memorie 1Kx32", "2 memorii 64Kx16 si 2 memorii 1Kx16"], feedback: ""},
+15: {question: "Care va fi valoarea lui AX dupa executia urmatoarelor instructiuni? XOR AL, AL XOR AH, AH", rights: ["0000H"], wrongs: ["Nu se poate determina", "FFFFH", "FF00H"], feedback: ""},
+16: {question: "Memoria accesibila procesorului 8086 este impartita in segmente de:", rights: ["64KB"], wrongs: ["32KB", "1MB", "16KB"], feedback: ""},
+17: {question: "Intel 8086 este un microprocesor pe:", rights: ["16 biti"], wrongs: ["20 biti", "32 biti", "8 biti"], feedback: ""},
+18: {question: "Care este ultima adresa pentru un ROM de 12kB mapat la inceputul spatiului de memorie al unui procesor generic cu magistrala de adrese de 16 biti?", rights: ["2FFFH"], wrongs: ["1FFFH", "3FFFH", "3000H"], feedback: ""},
+19: {question: "Care din urmatoarele nu este un bit de flag din registrul de stare al 8086?", rights: ["Red Flag"], wrongs: ["Trap Flag", "Interrupt Flag", "Direction Flag"], feedback: ""},
+20: {question: "Offset-ul unui segment 8086 variaza intre:", rights: ["0000H to FFFFH"], wrongs: ["00H to FFH", "00000H to FFFFFH", "000H to FFFH"], feedback: ""},
+21: {question: "Daca adresele de segment sunt de la 0000H la F000H si adresele de offset sunt din intervalul 0000H la FFFFH, atunci adresele fizice sunt din intervalul", rights: ["00000H to FFFFFH"], wrongs: ["0000H to FFFFH", "00000H to F0000H", "0000H to FFF0H"], feedback: ""},
+22: {question: "Ce magistrala a 8086 este bidirectionala?", rights: ["Date"], wrongs: ["Niciuna", "Adrese", "Control"], feedback: ""},
+23: {question: "Care din urmatoarele este un registru pe 16 biti?", rights: ["AX"], wrongs: ["AL", "AH", "Niciunul"], feedback: ""},
+24: {question: "Timer-ul programabil 8254 are in componenta lui un numar de …. timere:", rights: ["3"], wrongs: ["1", "4", "2"], feedback: ""},
+25: {question: "Cand ALE este active (1 logic) pe magistrala AD0..15 circula:", rights: ["Adrese"], wrongs: ["Instructiuni", "Comenzi", "Date"], feedback: ""},
+26: {question: "Pentru a indica dispozitivului periferic ca transferul DMA a fost efectuat, controllerul DMA activeaza semnalul", rights: ["DACK"], wrongs: ["HLDA", "HRQ", "ALE"], feedback: ""},
+27: {question: "Pentru a obtine o memorie de 66Kx16 avem nevoie de cate chip-uri de 2Kx8?", rights: ["66"], wrongs: ["132", "imposibil de obtinul", "33"], feedback: ""},
+28: {question: "In modul cascadat, numarul de vectori de intrerupere pe care-i pune la dispozitie un circuit cu controller 8259 este de:", rights: ["64"], wrongs: ["4", "8", "16"], feedback: ""},
+29: {question: "Instructiunea MOV AX, 1234H este un exemplu de adresare:", rights: ["imediata"], wrongs: ["directa", "baxata indexata", "indexata"], feedback: ""},
+30: {question: "Daca microprocesorul are 10 linii de adresa, atunci numarul de locatii de memorie adresabile este:", rights: ["1024"], wrongs: ["2048", "niciuna", "512"], feedback: ""},
+31: {question: "Registrul de stare al unui procesor indica:", rights: ["Conditia rezultatului operatiei curente din UAL"], wrongs: ["Rezultatul ultimei adunari", "Ciclul curent de magistrala", "Starea memoriei"], feedback: ""},
+32: {question: "Magistrala de adrese a lui 8086 are latimea de:", rights: ["20 biti"], wrongs: ["16 biti", "8 biti", "32 biti"], feedback: ""},
+33: {question: "Instructiunea MOV IVAL[DI+4],CX este un exemplu de adresare:", rights: ["Indexata cu deplasament"], wrongs: ["Indirecta", "Imediata", "Prin registru"], feedback: ""},
+34: {question: "Care din urmatoarele nu face parte din setul de instructiuni al 8086?", rights: ["HCF"], wrongs: ["MOV", "ADD", "JMP"], feedback: ""},
+35: {question: "Instructiunea CMP WORD PTR [BX+DI],10 este un exemplu de adresare:", rights: ["bazata indexata"], wrongs: ["imediata", "prin registru", "indirecta"], feedback: ""},
+36: {question: "Instructiunea MOV AX, BX este un exemplu de adresare:", rights: ["prin registru"], wrongs: ["indexata", "bazata indexata", "imediata"], feedback: ""},
+37: {question: "Ce metoda elibereaza procesorul de anumite tipuri de transfer de date?", rights: ["Direct Memory Access"], wrongs: ["Intreruperile software", "Interrupt-driven I/O", "Polled I/O"], feedback: ""},
+38: {question: "Numarul liniilor de adresa, respectiv date pentru 8086:", rights: ["20 si 16"], wrongs: ["8 si 8", "16 si 20", "16 si 16"], feedback: ""},
+39: {question: "Numarul liniilor de adresa, respectiv date pentru 8086:", rights: ["24"], wrongs: ["23", "20", "29"], feedback: ""},
+40: {question: "Instructiunea JMP JMPTAB[BX] este un exemplu de adresare:", rights: ["bazata, cu deplasament"], wrongs: ["directa", "prin registru", "indirecta"], feedback: ""},
+41: {question: "DRAM este mai complicat de utilizat decat SRAM din cauza", rights: ["Circuitelor de interfatare"], wrongs: ["Unitatii de executie", "Costului", "Complexitatii"], feedback: ""},
+42: {question: "AX = ? MOV AL, 0 MOV AH, 15 MOV CL, 3 SHR AX, CL", rights: ["01E0H"], wrongs: ["Nu se poate determina", "001EH", "7800H"], feedback: ""},
+43: {question: "AX = ? XOR AL, AL MOV AH, 15 MOV CL, 3 ADD AL, 90H", rights: ["0F90H"], wrongs: ["Nu se poate determina", "001EH", "7800H"], feedback: ""},
+44: {question: "Direction flag este folosit la:", rights: ["String instructions"], wrongs: ["Stack instructions", "Branch Instructions", "Atithmetic Instructions"], feedback: ""},
+45: {question: "Care va fi valoarea lui AX dupa executia urmatoarelor instructiuni? MOV AL, 15 MOV AH, 15", rights: ["0F0FH"], wrongs: ["F0F0H", "00FFH", "FF00H"], feedback: "15 = F in hexa, pune 0F in AH (bitul high) și la fel in AL"},
+46: {question: "Intr-o schema de tip memory-mapped, perifericele sunt vazute drept:", rights: ["Locatii de memorie"], wrongs: ["Doar dispozitive de intrare", "Dispozitive disticnte de I/O", "Doar dispozitive de iesire"], feedback: ""},
+47: {question: "Daca segment address = 1005H, offset address = 5555H, atunci adresa fizica este:", rights: ["155A5H"], wrongs: ["655A5H", "4550AH", "56555H"], feedback: ""}
+};
+        function insertFilterButtons(chunkSize) {
+            let questionsNumber = Object.keys(RIGHTS).length;
+
+            let rowDiv = document.createElement("div")
+            rowDiv.classList.add('row', "filterDiv");
+
+            for (let i = 0; i < questionsNumber; i += chunkSize) {
+                let intervalButton = document.createElement("button");
+                intervalButton.classList.add("btn", "btn-light","col-4","mr-1", "filterButton");
+                intervalButton.setAttribute("start", i);
+                intervalButton.setAttribute("end", i + chunkSize < questionsNumber ? i + chunkSize : questionsNumber);
+
+                intervalButton.textContent = (i + 1).toString() + "-" + (i + chunkSize < questionsNumber ? i + chunkSize : questionsNumber).toString()
+                rowDiv.appendChild(intervalButton);
+            }
+            document.body.appendChild(rowDiv);
+        }
+        insertFilterButtons(10);
+
+
+        /* Returns an array of strings */
+        function getShuffledQuestionKeys(idxStart, idxEnd) {
+            let questionsKeys = Object.keys(RIGHTS);
+            if (idxStart !== undefined && idxEnd != undefined)
+                questionsKeys = questionsKeys.slice(idxStart, idxEnd);
+            return questionsKeys.sort((a, b) => 0.5 - Math.random());
+        }
+
+        /* Returns an array of strings */
+        function getShuffledOptions(options) {
+            return options
+                .map(value => ({ value, sort: Math.random() }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value)
+        }
+
+        function insertQuestions(idxStart, idxEnd){
+            let quizzesMain = document.createElement('main')
+            let questionNumber = 0;
+            getShuffledQuestionKeys(idxStart, idxEnd).forEach(questionID => {
+                RIGHTS[questionID].rightids = [];
+                RIGHTS[questionID].wrongids = [];
+
+                let quizDiv = document.createElement('div')
+                quizDiv.classList.add('quizDiv', "d-grid", "gap-1");
+                quizDiv.setAttribute('data-id', questionID);
+
+                let questionParagraph = document.createElement('p');
+                questionParagraph.classList.add("question");
+                questionParagraph.innerHTML = `${++questionNumber}. ${RIGHTS[questionID].question.replace(/(?:\r\n|\r|\n)/g, '<br>')}`;
+                quizDiv.appendChild(questionParagraph);
+
+                let optionID = 0;
+                let allOptions = RIGHTS[questionID].rights;
+                allOptions = allOptions.concat(RIGHTS[questionID].wrongs)
+                getShuffledOptions(allOptions).forEach(optionText => {
+                    optionButton = document.createElement('button');
+                    optionButton.classList.add("optionButton", "btn", "btn-light");
+                    optionButton.innerHTML = optionText;
+
+                    if (RIGHTS[questionID].rights.includes(optionText))
+                        RIGHTS[questionID].rightids.push(optionID.toString());
+                    else if (RIGHTS[questionID].wrongs.includes(optionText))
+                        RIGHTS[questionID].wrongids.push(optionID.toString());
+                    optionButton.setAttribute('data-id', optionID++)
+                    quizDiv.appendChild(optionButton);
+                });
+
+                quizzesMain.appendChild(quizDiv);
+            });
+            document.body.appendChild(quizzesMain);
+        }
+        insertQuestions();
+
+
+
+
+
+
+        const onClick = (event) => {
+        const element = event.target;
+        const elementID = element.getAttribute('data-id');
+        const elementParent = element.parentNode;
+        const elementParentID = elementParent.getAttribute('data-id');
+        const isFilterButton = element.classList.contains("filterButton");
+        const isOptionButton = element.classList.contains("optionButton");
+        const isOptionButtonParentAnswered = elementParent.hasAttribute('question-already-answered');
+
+        if (isFilterButton) {
+            document.querySelector('main').textContent = "";
+            insertQuestions(parseInt(element.getAttribute('start')), parseInt(element.getAttribute('end')));
+            return;
+        } 
+        if (isOptionButton) {
+            if (isOptionButtonParentAnswered) return;
+
+            element.setAttribute('chosen', "");
+            const selectedOptionButtons = elementParent.querySelectorAll("button[chosen]").length;
+            const numberOfRightAnswers = RIGHTS[elementParentID].rightids.length;
+            if (selectedOptionButtons === numberOfRightAnswers) {
+            elementParent.setAttribute('question-already-answered', "");
+            elementParent.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest"
+            });
+
+            let rightsGiven = 0;
+            elementParent.querySelectorAll("button").forEach(option => {
+                element.classList.add("pointerNone");
+                option.classList.remove("btn-light");
+                const isRight = RIGHTS[elementParentID].rightids.includes(option.getAttribute('data-id'));
+
+                if (option.hasAttribute('chosen')) {
+                if (isRight) {
+                    rightsGiven++;
+                    option.classList.add("btn-success");
+                } else {
+                    option.classList.add("btn-danger");
+                }
+                } else if (isRight) {
+                option.classList.add("btn-success", "makeOpaque");
+                }
+            });
+
+            let percentageRight = (100 * rightsGiven) / numberOfRightAnswers;
+            let percentageWrong = 100 - percentageRight;
+            const progressBar = `
+                <section class="progress" style="height: 80%; margin-top: 3px; opacity: 0.9">
+                <section class="progress-bar" style="width: 1%; background: white"></section>
+                <section class="progress-bar-striped bg-success" style="width: ${percentageRight * 0.99}%; text-align: center; color: white">${rightsGiven}</section>
+                <section class="progress-bar-striped bg-danger" style="width: ${percentageWrong * 0.99}%; text-align: center; color: white">${numberOfRightAnswers - rightsGiven}</section>
+                <section class="progress-bar" style="width: 1%; background: white"></section>
+                </section>`;
+
+            elementParent.innerHTML += progressBar;
+            elementParent.innerHTML += `<p>${RIGHTS[elementParentID].feedback}</p>`
+            }
+        }
+        }
+        window.addEventListener('click', onClick);
+    }
+
+    
+
+    </script>
+
+</body>
+</html>
+</html>
